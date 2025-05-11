@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Certificate - GiveMyCertificate</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f3f8fc;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        background-color: #dff3fd;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      .header img {
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      .header h2 {
+        margin: 0;
+      }
+
+      .container {
+        display: flex;
+        padding: 20px;
+        gap: 20px;
+      }
+
+      .certificate-box {
+        flex: 2;
+        background-color: white;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .certificate-box img {
+        width: 100%;
+        border-radius: 10px;
+      }
+
+      .info-box {
+        flex: 1;
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+      }
+
+      .info-box h4 {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+      }
+
+      .info-box p {
+        margin: 6px 0;
+      }
+
+      .info-box .tag {
+        display: inline-block;
+        background: #e0f2ff;
+        color: #007bff;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-right: 5px;
+        margin-top: 5px;
+      }
+
+      .buttons {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .buttons button {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .buttons button:hover {
+        background-color: #0056b3;
+      }
+
+      .footer {
+        background: #f0f0f0;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      /* Fixed social buttons */
+      .social-fixed {
+        position: fixed;
+        top: 40%;
+        left: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+      }
+
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 18px;
+        transition: background-color 0.3s ease;
+      }
+
+      .social-icon:hover {
+        background-color: #0056b3;
+      }
+
+      .social-icon.fb { background-color: #3b5998; }
+      .social-icon.ig { background-color: #e4405f; }
+      .social-icon.in { background-color: #0e76a8; }
+    </style>
+  </head>
+
+  <body>
+    <!-- Social Media Buttons -->
+    <div class="social-fixed">
+      <a href="https://facebook.com" target="_blank" class="social-icon fb">f</a>
+      <a href="https://instagram.com" target="_blank" class="social-icon ig">📸</a>
+      <a href="https://linkedin.com" target="_blank" class="social-icon in">in</a>
+    </div>
+
+    <div class="header">
+      <img src="img/gmc_logo.png" alt="Logo" />
+      <h2>Give My Certificate</h2>
+    </div>
+
+    <div class="container">
+      <!-- Left certificate -->
+      <div class="certificate-box">
+        <img src="img/certificate.png" alt="Certificate" />
+      </div>
+
+      <!-- Right Info Panel -->
+      <div class="info-box">
+        <h4>Issued By</h4>
+        <p><strong>Organisation:</strong> ElevateX.io</p>
+
+        <h4>About Course</h4>
+        <p>
+          This certificate is awarded for completing the C++ Masterclass: Your Gateway to Placement Success.
+        </p>
+
+        <h4>Skills</h4>
+        <span class="tag">C</span>
+        <span class="tag">C++</span>
+        <span class="tag">Problem Solving</span>
+        <span class="tag">DSA with C++</span>
+
+        <h4>Event Info</h4>
+        <p><strong>Start Date:</strong> 02 May, 2025</p>
+        <p><strong>End Date:</strong> 02 May, 2025</p>
+        <p><strong>Issued on:</strong> 04 May, 2025</p>
+        <p><strong>Expires on:</strong> No Expiry</p>
+
+        <h4>Actions</h4>
+        <div class="buttons">
+          <button onclick="downloadImage()">📷 Download Image</button>
+          <button onclick="downloadPDF()">📄 Download PDF</button>
+          <button onclick="addToLinkedIn()">🔗 Add to LinkedIn</button>
+          <button onclick="copyLink()">📤 Share Credential</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Powered by - Give My Certificate
+    </div>
+
+    <script>
+      function downloadImage() {
+        const link = document.createElement("a");
+        link.href = "img/certificate.png";
+        link.download = "Certificate.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function downloadPDF() {
+        const link = document.createElement("a");
+        link.href = "certificate.pdf";
+        link.download = "Certificate.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function copyLink() {
+        const dummyLink = "https://givemycertificate.com/credential/xyz123"; // Replace with actual link
+        navigator.clipboard.writeText(dummyLink).then(() => {
+          alert("Share link copied to clipboard!");
+        });
+      }
+
+      function addToLinkedIn() {
+        const certName = encodeURIComponent("C++ Masterclass: Your Gateway to Placement Success");
+        const orgName = encodeURIComponent("ElevateX.io");
+        const certUrl = encodeURIComponent("https://givemycertificate.com/credential/xyz123");
+        const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${certName}&organizationName=${orgName}&certUrl=${certUrl}`;
+        window.open(linkedinUrl, "_blank");
+      }
+    </script>
+  </body>
+</html>

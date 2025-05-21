@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificate - GiveMyCertificate</title>
     <style>
       body {
         font-family: Arial, sans-serif;
-        background: #f3f8fc;
         margin: 0;
         padding: 0;
-        display: flex;
-        flex-direction: column;
+        background: url(img/back.jpeg) no-repeat center center fixed;
+        background-size: cover;
+        position: relative;
+      }
+      
+      body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(243, 248, 252, 0.85);
+        z-index: -1;
       }
 
       .header {
-        background-color: #dff3fd;
+        background-color: rgba(223, 243, 253, 0.9);
         padding: 20px;
         display: flex;
         align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(2px);
       }
 
       .header img {
@@ -28,167 +43,219 @@
         margin: 0;
       }
 
-      .container {
-        display: flex;
+      .main-container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 20px;
+      }
+
+      .certificate-container {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 30px;
+        backdrop-filter: blur(1px);
+      }
+
+      .certificate-image {
+        width: 100%;
         padding: 20px;
+        text-align: center;
+        background: white;
+      }
+
+      .certificate-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        border: 1px solid #eee;
+      }
+
+      .certificate-details {
+        padding: 20px;
+        background-color: rgba(249, 249, 249, 0.9);
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
       }
 
-      .certificate-box {
-        flex: 2;
-        background-color: white;
-        border-radius: 10px;
-        padding: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      .detail-section {
+        margin-bottom: 15px;
       }
 
-      .certificate-box img {
-        width: 100%;
-        border-radius: 10px;
-      }
-
-      .info-box {
-        flex: 1;
-        background-color: #ffffff;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        font-size: 14px;
-      }
-
-      .info-box h4 {
+      .detail-section h4 {
         margin-bottom: 10px;
-        border-bottom: 1px solid #ccc;
+        color: #2c3e50;
+        border-bottom: 1px solid #ddd;
         padding-bottom: 5px;
       }
 
-      .info-box p {
-        margin: 6px 0;
-      }
-
-      .info-box .tag {
-        display: inline-block;
-        background: #e0f2ff;
-        color: #007bff;
-        padding: 4px 8px;
-        border-radius: 4px;
-        margin-right: 5px;
-        margin-top: 5px;
-      }
-
-      .buttons {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .buttons button {
-        background-color: #007bff;
-        color: white;
-        padding: 8px 12px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 13px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .buttons button:hover {
-        background-color: #0056b3;
-      }
-
-      .footer {
-        background: #f0f0f0;
-        text-align: center;
-        padding: 10px;
+      .detail-section p {
+        margin: 8px 0;
         font-size: 14px;
       }
 
-      /* Fixed social buttons */
-      .social-fixed {
-        position: fixed;
-        top: 40%;
-        left: 10px;
+      .skills-container {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        z-index: 1000;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
       }
 
-      .social-icon {
-        width: 40px;
-        height: 40px;
-        background-color: #007bff;
+      .skill-tag {
+        background: #e0f2ff;
+        color: #191a82;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+      }
+
+      .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .action-btn {
+        background-color: #9f087e;
         color: white;
-        border-radius: 50%;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
         display: flex;
         align-items: center;
+        gap: 8px;
+        transition: background-color 0.3s;
+      }
+
+      .action-btn:hover {
+        background-color: #123e6d;
+      }
+
+      .footer {
+        background: rgba(240, 240, 240, 0.9);
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+        margin-top: 30px;
+        backdrop-filter: blur(1px);
+      }
+
+      .social-links {
+        display: flex;
         justify-content: center;
-        text-decoration: none;
-        font-size: 18px;
-        transition: background-color 0.3s ease;
+        gap: 20px;
+        padding: 15px;
+        background: rgba(240, 240, 240, 0.9);
+        backdrop-filter: blur(1px);
       }
 
-      .social-icon:hover {
-        background-color: #0056b3;
+      .social-links a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        transition: transform 0.3s;
       }
 
-      .social-icon.fb { background-color: #3b5998; }
-      .social-icon.ig { background-color: #e4405f; }
-      .social-icon.in { background-color: #0e76a8; }
+      .social-links a:hover {
+        transform: scale(1.1);
+      }
+
+      .social-links img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      @media (max-width: 768px) {
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .action-buttons {
+          flex-direction: column;
+        }
+        
+        .action-btn {
+          width: 100%;
+          justify-content: center;
+        }
+      }
     </style>
-  </head>
+</head>
 
-  <body>
-    <!-- Social Media Buttons -->
-    <div class="social-fixed">
-      <a href="https://facebook.com" target="_blank" class="social-icon fb">f</a>
-      <a href="https://instagram.com" target="_blank" class="social-icon ig">📸</a>
-      <a href="https://linkedin.com" target="_blank" class="social-icon in">in</a>
-    </div>
-
+<body>
     <div class="header">
       <img src="img/gmc_logo.png" alt="Logo" />
       <h2>Give My Certificate</h2>
     </div>
 
-    <div class="container">
-      <!-- Left certificate -->
-      <div class="certificate-box">
-        <img src="img/certificate.png" alt="Certificate" />
-      </div>
-
-      <!-- Right Info Panel -->
-      <div class="info-box">
-        <h4>Issued By</h4>
-        <p><strong>Organisation:</strong> ElevateX.io</p>
-
-        <h4>About Course</h4>
-        <p>
-          This certificate is awarded for completing the C++ Masterclass: Your Gateway to Placement Success.
-        </p>
-
-        <h4>Skills</h4>
-        <span class="tag">C</span>
-        <span class="tag">C++</span>
-        <span class="tag">Problem Solving</span>
-        <span class="tag">DSA with C++</span>
-
-        <h4>Event Info</h4>
-        <p><strong>Start Date:</strong> 02 May, 2025</p>
-        <p><strong>End Date:</strong> 02 May, 2025</p>
-        <p><strong>Issued on:</strong> 04 May, 2025</p>
-        <p><strong>Expires on:</strong> No Expiry</p>
-
-        <h4>Actions</h4>
-        <div class="buttons">
-          <button onclick="downloadImage()">📷 Download Image</button>
-          <button onclick="downloadPDF()">📄 Download PDF</button>
-          <button onclick="addToLinkedIn()">🔗 Add to LinkedIn</button>
-          <button onclick="copyLink()">📤 Share Credential</button>
+    <div class="main-container">
+      <div class="certificate-container">
+        <!-- Certificate Image at the Top -->
+        <div class="certificate-image">
+          <img src="img/img1.jpeg" alt="Certificate" />
+        </div>
+        
+        <!-- Certificate Details Below -->
+        <div class="certificate-details">
+          <div class="details-grid">
+            <div class="detail-section">
+              <h4>Issued To</h4>
+              <p><strong>Name:</strong> Ridhi Kundu</p>
+              <p><strong>Program:</strong> SAWIT.AI Learnathon Program</p>
+              <p><strong>Completion Date:</strong> 21st September</p>
+            </div>
+            
+            <div class="detail-section">
+              <h4>Course Details</h4>
+              <p><strong>Focus Area:</strong> Fundamentals of Generative AI</p>
+              <p><strong>Description:</strong> This certificate is awarded for completing the SAWIT.AI: Your Gateway to Placement Success.</p>
+            </div>
+            
+            <div class="detail-section">
+              <h4>Event Info</h4>
+              <p><strong>Start Date:</strong> 02 May, 2024</p>
+              <p><strong>End Date:</strong> 02 May, 2024</p>
+              <p><strong>Issued on:</strong> 04 May, 2024</p>
+              <p><strong>Expires on:</strong> No Expiry</p>
+            </div>
+            
+            <div class="detail-section">
+              <h4>Supported By</h4>
+              <p>Women Techmakers</p>
+              <p>Google for Developers</p>
+            </div>
+            
+            <div class="detail-section">
+              <h4>Signatories</h4>
+              <p>Dr. Dinesh Singh</p>
+              <p>Director, Policy & Academic Planning Bureau, AICTE</p>
+            </div>
+            
+            <div class="detail-section">
+              <h4>Skills Acquired</h4>
+              <div class="skills-container">
+                <span class="skill-tag">C++</span>
+                <span class="skill-tag">Problem Solving</span>
+                <span class="skill-tag">DSA with C++</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="action-buttons">
+            <button class="action-btn" onclick="downloadImage()">📷 Download Image</button>
+            <button class="action-btn" onclick="downloadPDF()">📄 Download PDF</button>
+            <button class="action-btn" onclick="addToLinkedIn()">🔗 Add to LinkedIn</button>
+            <button class="action-btn" onclick="copyLink()">📤 Share Credential</button>
+          </div>
         </div>
       </div>
     </div>
@@ -197,10 +264,22 @@
       Powered by - Give My Certificate
     </div>
 
+    <div class="social-links">
+      <a href="https://www.facebook.com/share/1BndSZydYF/" target="_blank" title="Facebook">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/givemycertificate?igsh=MTlyN2czc2g0Mmo3cA==" target="_blank" title="Instagram">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram">
+      </a>
+      <a href="https://www.linkedin.com/company/givemycertificate/" target="_blank" title="LinkedIn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+      </a>
+    </div>
+
     <script>
       function downloadImage() {
         const link = document.createElement("a");
-        link.href = "img/certificate.png";
+        link.href = "img/img1.jpeg";
         link.download = "Certificate.png";
         document.body.appendChild(link);
         link.click();
@@ -209,27 +288,27 @@
 
       function downloadPDF() {
         const link = document.createElement("a");
-        link.href = "certificate.pdf";
-        link.download = "Certificate.pdf";
+        link.href = "img/img1.jpeg";
+        link.download= "Certificate.pdf";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       }
 
       function copyLink() {
-        const dummyLink = "https://givemycertificate.com/credential/xyz123"; // Replace with actual link
+        const dummyLink = "https://givemycertificate.com/credential/xyz123";
         navigator.clipboard.writeText(dummyLink).then(() => {
           alert("Share link copied to clipboard!");
         });
       }
 
       function addToLinkedIn() {
-        const certName = encodeURIComponent("C++ Masterclass: Your Gateway to Placement Success");
-        const orgName = encodeURIComponent("ElevateX.io");
+        const certName = encodeURIComponent("SAWIT.AI Learnathon Program");
+        const orgName = encodeURIComponent("GUVI");
         const certUrl = encodeURIComponent("https://givemycertificate.com/credential/xyz123");
         const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${certName}&organizationName=${orgName}&certUrl=${certUrl}`;
         window.open(linkedinUrl, "_blank");
       }
     </script>
-  </body>
+</body>
 </html>
